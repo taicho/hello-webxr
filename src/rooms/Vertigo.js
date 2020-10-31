@@ -21,7 +21,7 @@ export function setup(ctx) {
   const material = new THREE.MeshBasicMaterial({color: 0xffffff, map: texture, lightMap: lightmap} );
 
   scene = assets['vertigo_model'].scene;
-  scene.getObjectByName('city').material = material;
+  // scene.getObjectByName('city').material = material;
   scene.getObjectByName('teleport').visible = false;
 
   scene.getObjectByName('door_frame').material =
