@@ -49,11 +49,27 @@ export function setup(ctx) {
     }
   });
 
-  let teleport = scene.getObjectByName('teleport');
+  let teleport = scene.getObjectByName('teleport');  
   teleport.visible = true;
   teleport.material.visible = false;
   ctx.raycontrol.addState('teleportVertigo', {
     colliderMesh: teleport,
+    onHover: (intersection, active) => {
+      ctx.teleport.onHover(intersection.point, active);
+    },
+    onHoverLeave: () => {
+      ctx.teleport.onHoverLeave();
+    },
+    onSelectStart: (intersection, e) => {
+      ctx.teleport.onSelectStart(e);
+    },
+    onSelectEnd: (intersection) => {
+      ctx.teleport.onSelectEnd(intersection.point);
+    }
+  });
+  let bgLogo = scene.getObjectByName('bglogo');
+  ctx.raycontrol.addState('bgVertigoState', {
+    colliderMesh: bgLogo,
     onHover: (intersection, active) => {
       ctx.teleport.onHover(intersection.point, active);
     },
@@ -77,6 +93,7 @@ export function enter(ctx) {
 
   ctx.raycontrol.activateState('teleportVertigo');
   ctx.raycontrol.activateState('doorVertigo');
+  ctx.raycontrol.activateState('bgVertigoState');
 }
 
 export function exit(ctx) {
@@ -85,6 +102,7 @@ export function exit(ctx) {
 
   ctx.raycontrol.deactivateState('teleportVertigo');
   ctx.raycontrol.deactivateState('doorVertigo');
+  ctx.raycontrol.deactivateState('bgVertigoState');
 }
 
 export function execute(ctx, delta, time) {
