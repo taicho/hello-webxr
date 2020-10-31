@@ -80,7 +80,7 @@ export function setup(ctx) {
       ctx.teleport.onSelectStart(e);
     },
     onSelectEnd: (intersection) => {
-      ctx.teleport.onSelectEnd(intersection.point);
+      ctx.teleport.onSelectEnd(intersection.point,true);
     }
   });
 }

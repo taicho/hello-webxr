@@ -1,4 +1,4 @@
-import {rayMaterial} from "./RayControl.js";
+import { rayMaterial } from "./RayControl.js";
 import * as THREE from 'three';
 
 var tempMatrix = new THREE.Matrix4();
@@ -79,10 +79,12 @@ export default class Teleport {
     }
   }
 
-  onSelectEnd(targetPoint) {
+  onSelectEnd(targetPoint, includeHeight) {
     const headPosition = this.ctx.renderer.xr.getCamera(this.ctx.camera).position;
     const offset = targetPoint.sub(headPosition);
-    offset.y = 0; // We don't want to change height to floor's level
+    if (!includeHeight) {
+      offset.y = 0; // We don't want to change height to floor's level
+    }
 
     this.ctx.cameraRig.position.add(offset);
     this.teleportHitGeometry.visible = false;
