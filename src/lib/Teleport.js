@@ -84,6 +84,8 @@ export default class Teleport {
     const offset = targetPoint.sub(headPosition);
     if (!includeHeight) {
       offset.y = 0; // We don't want to change height to floor's level
+    } else {
+      offset.y = offset.y - 2;
     }
 
     this.ctx.cameraRig.position.add(offset);
